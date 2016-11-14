@@ -1,12 +1,17 @@
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CleanPlugin       = require('clean-webpack-plugin');
 var appEnv = process.env.NODE_ENV || 'development';
+var path = require('path')
+
+console.log(__dirname);
+console.log(path.join(__dirname, 'dist'));
 
 var config = {
 
   entry: './src/bootstrap.js',
   output: {
-    path: __dirname + '/dist',
+    //path: __dirname + '/dist',
+    path: path.join(__dirname, 'dist'),
     filename: "bundle.js"
   },
 
@@ -43,19 +48,19 @@ var config = {
   devServer: {
     contentBase: "./src",
     noInfo: false,
-    hot: false
+    hot: true
   }
 };
 
 if (appEnv === 'development') {
   config.devtool = '#inline-source-map';
 }
-
+/*
 if (appEnv === 'production') {
   config.plugins.push(
     // Remove build related folders
     new CleanPlugin(['dist'])
   );
 }
-
+*/
 module.exports = config;
